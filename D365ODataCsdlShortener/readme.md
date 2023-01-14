@@ -18,13 +18,14 @@ Download from GitHub, compile and use: https://github.com/MazZzDaI/D365ODataCsdl
 ## How to use D365ODataCsdlShortener
 Once you've compiled/installed the package locally, you can invoke the D365FO Data CSDL Shortener by running: D365ODataCsdlShortener [command]. 
 You can access the list of command options we have by running D365ODataCsdlShortener -h 
-The tool avails the following commands: 
-	• --csdlSourceFilePath(-cs) - CSDL file path in the local filesystem or a valid URL hosted on an HTTPS server 
-	• --csdlEntitySetFilter(-csfe) - a filter parameter that user can use to select a subset of data entities from a large CSDL file. By providing a comma separated list of EntitySet names that appear in the EntityContainer
-	• --csdlActionFilter(-csfa) - a filter parameter that user can use to select a subset of data entity actions from a large CSDL file. By providing a comma separated list of Action names
-	• --csdlTransformedFilePath(-o) - Output directory path for the transformed document 
-	• --loglevel(-ll) - The log level to use when logging messages to the main output 
- 
+The tool avails the following commands:
+
+	--csdlSourceFilePath (-cs) - CSDL file path in the local filesystem or a valid URL hosted on an HTTPS server
+	--csdlEntitySetFilter (-csfe) - a filter parameter that user can use to select a subset of data entities from a large CSDL file. By providing a comma separated list of EntitySet names that appear in the EntityContainer
+	--csdlActionFilter (-csfa) - a filter parameter that user can use to select a subset of data entity actions from a large CSDL file. By providing a comma separated list of Action names
+	--csdlTransformedFilePath (-o) - Output directory path for the transformed document
+	--logLevel (-ll) - The log level to use when logging messages to the main output 
+
  **Examples:**  
 
 	1. Get local $metadata.xml file and keep only VendorPaymentJournalLines and CustomersV2 data entity, also to keep getDirects and RunDocumentAction actions 
