@@ -51,7 +51,7 @@ steps:
         echo $version
         echo "##vso[task.setvariable variable=appversion]$version"
 
-# publish D365ODataCsdlShortener as an .exe
+# Publish D365ODataCsdlShortener as an .exe
 - task: DotNetCoreCLI@2
   displayName: publish D365ODataCsdlShortener as executable
   inputs:
@@ -61,9 +61,32 @@ steps:
     publishWebProjects: False
     zipAfterPublish: false 
 
+# Copy build artefacts to ADO pipeline artefacts directory
+- task: CopyFiles@2
+  displayName: Prepare staging folder for upload
+  inputs:
+    targetFolder: $(Build.ArtifactStagingDirectory)/Nugets
+    sourceFolder: $(Build.ArtifactStagingDirectory)
+    content: '*.nupkg'
+
+# Publish .nupkg to ADO pipeline artefacts
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Nugets'
+  inputs:
+    ArtifactName: Nugets
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Nugets'
+
+# Publish .exe to ADO pipeline artefacts
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: D365ODataCsdlShortener'
+  inputs: 
+    ArtifactName: D365ODataCsdlShortener-v$(appversion)
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/D365ODataCsdlShortener-v$(appversion)'
+
+# Publish to nuget.org
 - task: NuGetCommand@2
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Nugets/*.nupkg;!$(Build.ArtifactStagingDirectory)/Nugets/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGetD365ODataCsdlShortener'
