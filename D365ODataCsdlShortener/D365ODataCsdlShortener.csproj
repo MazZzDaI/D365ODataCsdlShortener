@@ -8,7 +8,7 @@
     <SignAssembly>True</SignAssembly>
     <Copyright>Oleksandr Dudarenko</Copyright>
     <PackageProjectUrl>https://github.com/MazZzDaI/D365ODataCsdlShortener</PackageProjectUrl>
-    <Description>D365FO Data CSDL Shortener is a command line tool that makes it easy to make a CSDL file shorter</Description>
+    <Description>Dynamics 365 Finance / Supply Chain Management (D365F&amp;O/SCM) OData CSDL $metadata Shortener is a command line tool that makes it easy to make a CSDL file shorter</Description>
     <RepositoryUrl>https://github.com/MazZzDaI/D365ODataCsdlShortener</RepositoryUrl>
     <PackageTags>D365FO;CSDL;OData;metadata;xslt</PackageTags>
     <PackageReleaseNotes>https://github.com/MazZzDaI/D365ODataCsdlShortener</PackageReleaseNotes>
@@ -22,7 +22,7 @@
     <RootNamespace>D365ODataCsdlShortener</RootNamespace>
     <PackageId>D365ODataCsdlShortener</PackageId>
     <Title>D365ODataCsdlShortener</Title>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <ToolCommandName>D365ODataCsdlShortener</ToolCommandName>
   </PropertyGroup>
 

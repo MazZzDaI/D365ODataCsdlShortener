@@ -1,22 +1,30 @@
 # Overview 
 
-Dynamics 365 Finance / Supply Chain Management (D365F&O/SCM) OData CSDL Shortener is a command line tool that makes it easy to make a CSDL file shorter.
+Dynamics 365 Finance / Supply Chain Management (D365F&O/SCM) OData CSDL $metadata Shortener is a command line tool that makes it easy to make a CSDL file shorter.
+ 
 
 ## Capabilities
 
-D365FO Data CSDL Shortener can slice CSDL document by applying filtration by a public entity name(s) and/or data entity actions.
+D365FO OData CSDL Shortener can slice CSDL document by applying filtration by a public entity name(s) and/or data entity actions.
 This is useful for scenarios when it is necessary to convert a CSDL $metadata file from Dynamics 365 Finance and SCM (D365F&O/SCM) to other formats, such as OpenAPI or C# proxy classes, and do not break converter because of huge $metadata file size.
 
 The tool keeping the specified data entity(es) and/or data entity actions from the CSDL, and also cleaning orphaned file entries that is unused in converters and scaffolders. In other words it cleaning the orphaned tags from the CSDL file and significantly reducing the size of CSDL.
-
  
+
 ## Installation 
 
-Download from GitHub, compile and use: https://github.com/MazZzDaI/D365ODataCsdlShortener
+Install [D365ODataCsdlShortener](https://www.nuget.org/packages/D365ODataCsdlShortener) package from NuGet by running the following command:  
  
+### .NET CLI(Global)  
+	1. dotnet tool install --global D365ODataCsdlShortener
  
+### .NET CLI(local) 
+	1. dotnet new tool-manifest #if you are setting up the D365ODataCsdlShortener repo 
+	2. dotnet tool install --local D365ODataCsdlShortener
+ 
+
 ## How to use D365ODataCsdlShortener
-Once you've compiled/installed the package locally, you can invoke the D365FO Data CSDL Shortener by running: D365ODataCsdlShortener [command]. 
+Once you've compiled/installed the package locally, you can invoke the D365FO OData CSDL $metadata Shortener by running: D365ODataCsdlShortener [command]. 
 You can access the list of command options we have by running D365ODataCsdlShortener -h 
 The tool avails the following commands:
 
