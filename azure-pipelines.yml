@@ -26,13 +26,31 @@ steps:
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\D365ODataCsdlShortener.zip""'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'D365ODataCsdlShortener'
     publishLocation: 'Container'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+
+- task: NuGetAuthenticate@1
+  inputs:
+    nuGetServiceConnections: 'NuGetD365ODataCsdlShortener'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'byBuildNumber'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NuGetD365ODataCsdlShortener'
 
 - task: VSTest@2
   inputs:
