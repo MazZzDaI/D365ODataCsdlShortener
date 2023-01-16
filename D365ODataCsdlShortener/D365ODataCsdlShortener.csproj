@@ -5,6 +5,19 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <SignAssembly>True</SignAssembly>
+    <Copyright>Oleksandr Dudarenko</Copyright>
+    <PackageProjectUrl>https://github.com/MazZzDaI/D365ODataCsdlShortener</PackageProjectUrl>
+    <Description>D365FO Data CSDL Shortener is a command line tool that makes it easy to make a CSDL file shorter</Description>
+    <RepositoryUrl>https://github.com/MazZzDaI/D365ODataCsdlShortener</RepositoryUrl>
+    <PackageTags>D365FO,CSDL,OData,metadata,xslt</PackageTags>
+    <PackageReleaseNotes>https://github.com/MazZzDaI/D365ODataCsdlShortener</PackageReleaseNotes>
+    <PackAsTool>True</PackAsTool>
+    <PackageOutputPath>./../../artifacts</PackageOutputPath>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Company>Oleksandr Dudarenko</Company>
+    <Authors>Oleksandr Dudarenko</Authors>
   </PropertyGroup>
 
   <ItemGroup>
