@@ -1,6 +1,6 @@
 # Overview 
 
-D365FO Data CSDL Shortener is a command line tool that makes it easy to make a CSDL file shorter.
+Dynamics 365 Finance / Supply Chain Management (D365F&O/SCM) OData CSDL Shortener is a command line tool that makes it easy to make a CSDL file shorter.
 
 ## Capabilities
 

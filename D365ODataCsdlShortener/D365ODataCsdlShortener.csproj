@@ -22,7 +22,7 @@
     <RootNamespace>D365ODataCsdlShortener</RootNamespace>
     <PackageId>D365ODataCsdlShortener</PackageId>
     <Title>D365ODataCsdlShortener</Title>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <ToolCommandName>D365ODataCsdlShortener</ToolCommandName>
   </PropertyGroup>
 

@@ -45,7 +45,9 @@ namespace D365ODataCsdlShortener
                 CsdlTransformedFilePath = csdlTransformedFilePathOption,
                 LogLevelOption = logLevelOption
             };
-            
+
+            rootCommand.Description = @"Dynamics 365 Finance / Supply Chain Management (D365F&O/SCM) OData CSDL Shortener is a command line tool that makes it easy to make a CSDL file shorter.";
+
             // Parse the incoming args and invoke the handler
             await rootCommand.InvokeAsync(args);
 
