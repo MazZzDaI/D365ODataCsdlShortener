@@ -40,12 +40,13 @@ steps:
 - pwsh: dotnet pack $(Build.SourcesDirectory)/D365ODataCsdlShortener/D365ODataCsdlShortener.csproj -o $(Build.ArtifactStagingDirectory) --configuration $(BuildConfiguration) --no-build --include-symbols --include-source /p:SymbolPackageFormat=snupkg
   displayName: 'pack D365ODataCsdlShortener'
 
+# Get version number
 - task: PowerShell@2
   displayName: "Get D365ODataCsdlShortener's version-number from .csproj"
   inputs:
     targetType: 'inline'
     script: |
-        $xml = [Xml] (Get-Content .D365ODataCsdlShortener\D365ODataCsdlShortener.csproj)
+        $xml = [Xml] (Get-Content .\D365ODataCsdlShortener\D365ODataCsdlShortener.csproj)
         $version = $xml.Project.PropertyGroup.Version
         echo $version
         echo "##vso[task.setvariable variable=appversion]$version"
