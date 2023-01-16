@@ -35,10 +35,6 @@ steps:
     ArtifactName: 'D365ODataCsdlShortener'
     publishLocation: 'Container'
 
-- task: NuGetAuthenticate@1
-  inputs:
-    nuGetServiceConnections: 'NuGetD365ODataCsdlShortener'
-
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
