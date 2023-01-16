@@ -79,3 +79,10 @@ steps:
   inputs: 
     ArtifactName: D365ODataCsdlShortener-v$(appversion)
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/D365ODataCsdlShortener-v$(appversion)'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NuGetD365ODataCsdlShortener'
