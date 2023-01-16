@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -10,7 +10,7 @@
     <PackageProjectUrl>https://github.com/MazZzDaI/D365ODataCsdlShortener</PackageProjectUrl>
     <Description>D365FO Data CSDL Shortener is a command line tool that makes it easy to make a CSDL file shorter</Description>
     <RepositoryUrl>https://github.com/MazZzDaI/D365ODataCsdlShortener</RepositoryUrl>
-    <PackageTags>D365FO,CSDL,OData,metadata,xslt</PackageTags>
+    <PackageTags>D365FO;CSDL;OData;metadata;xslt</PackageTags>
     <PackageReleaseNotes>https://github.com/MazZzDaI/D365ODataCsdlShortener</PackageReleaseNotes>
     <PackAsTool>True</PackAsTool>
     <PackageOutputPath>./../../artifacts</PackageOutputPath>
@@ -18,6 +18,12 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Company>Oleksandr Dudarenko</Company>
     <Authors>Oleksandr Dudarenko</Authors>
+    <AssemblyName>D365ODataCsdlShortener</AssemblyName>
+    <RootNamespace>D365ODataCsdlShortener</RootNamespace>
+    <PackageId>D365ODataCsdlShortener</PackageId>
+    <Title>D365ODataCsdlShortener</Title>
+    <Version>1.0.1</Version>
+    <ToolCommandName>D365ODataCsdlShortener</ToolCommandName>
   </PropertyGroup>
 
   <ItemGroup>
