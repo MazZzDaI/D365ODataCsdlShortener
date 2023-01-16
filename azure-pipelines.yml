@@ -16,39 +16,65 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
+- task: UseDotNet@2
+  displayName: 'Use .NET 7'
   inputs:
-    restoreSolution: '$(solution)'
+    version: 7.x
 
-- task: VSBuild@1
+ # Install the nuget tool.
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet >=5.2.0'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\D365ODataCsdlShortener.zip""'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    versionSpec: '>=5.2.0'
+    checkLatest: true
+
+# Build the Product project
+- task: DotNetCoreCLI@2
+  displayName: 'build'
+  inputs:
+    projects: '$(Build.SourcesDirectory)\D365ODataCsdlShortener.sln'
+    arguments: '--configuration $(BuildConfiguration) --no-incremental'
+
+# Pack
+- pwsh: dotnet pack $(Build.SourcesDirectory)/D365ODataCsdlShortener/D365ODataCsdlShortener.csproj -o $(Build.ArtifactStagingDirectory) --configuration $(BuildConfiguration) --no-build --include-symbols --include-source /p:SymbolPackageFormat=snupkg
+  displayName: 'pack D365ODataCsdlShortener'
+
+- task: PowerShell@2
+  displayName: "Get D365ODataCsdlShortener's version-number from .csproj"
+  inputs:
+    targetType: 'inline'
+    script: |
+        $xml = [Xml] (Get-Content .D365ODataCsdlShortener\D365ODataCsdlShortener.csproj)
+        $version = $xml.Project.PropertyGroup.Version
+        echo $version
+        echo "##vso[task.setvariable variable=appversion]$version"
+
+# publish D365ODataCsdlShortener as an .exe
+- task: DotNetCoreCLI@2
+  displayName: publish D365ODataCsdlShortener as executable
+  inputs:
+    command: 'publish'
+    arguments: -c Release --runtime win-x64 /p:PublishSingleFile=true --self-contained --output $(Build.ArtifactStagingDirectory)/D365ODataCsdlShortener-v$(appversion) -p:PublishTrimmed=true
+    projects: 'D365ODataCsdlShortener/D365ODataCsdlShortener.csproj'
+    publishWebProjects: False
+    zipAfterPublish: false 
+
+- task: CopyFiles@2
+  displayName: Prepare staging folder for upload
+  inputs:
+    targetFolder: $(Build.ArtifactStagingDirectory)/Nugets
+    sourceFolder: $(Build.ArtifactStagingDirectory)
+    content: '*.nupkg'
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Nugets'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'D365ODataCsdlShortener'
-    publishLocation: 'Container'
+    ArtifactName: Nugets
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Nugets'
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    versioningScheme: 'off'
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'NuGetD365ODataCsdlShortener'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: D365ODataCsdlShortener'
+  inputs: 
+    ArtifactName: D365ODataCsdlShortener-v$(appversion)
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/D365ODataCsdlShortener-v$(appversion)'
