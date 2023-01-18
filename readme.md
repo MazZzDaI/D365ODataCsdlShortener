@@ -1,6 +1,6 @@
 # Overview 
 
-Dynamics 365 Finance / Supply Chain Management (D365F&O/SCM) OData CSDL $metadata shortener is a command line tool that makes it easy to make a CSDL file shorter.
+Dynamics 365 Finance / Supply Chain Management (D365F&O/SCM) OData CSDL $metadata shortener is a command line tool that makes it easy to make a CSDL file shorter and clean orphaned document parts.
  
 
 ## Capabilities
